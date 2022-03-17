@@ -1,0 +1,34 @@
+<div *ngIf="isUserDataLoaded" class="user-profile">
+
+  <h1>Моя страница</h1>
+  <div style="text-align: right">
+    <button mat-flat-button color="primary" (click)="openEditDialog()">Редактировать профиль</button>
+  </div>
+
+  <div style="padding-top: 2rem" class="row">
+    <div class="col">
+      <img class="profile-image" [src]="previewImgURL || formatImage(userProfileImage) || 'https://windows10free.ru/uploads/posts/2017-02/1487679899_icon-user-640x640.png'" alt="user image">
+
+      <input type="file"
+             style="display: none"
+             #fileInput
+             (change)="onFileSelected($event)">
+
+      <button mat-flat-button color="accent" (click)="fileInput.click()">Выбрать фото</button>
+      <button mat-button color="accent" *ngIf="selectedFile" (click)="onUpload()">Загрузить</button>
+    </div>
+    <div class="col" style="text-align: left">
+
+      <h2>{{user.username}}</h2>
+
+      <h3 style="font-style: italic">{{user.firstname}} {{user.lastname}}</h3>
+      <p>{{user.bio}}</p>
+    </div>
+
+    <mat-divider style="margin: 2rem 0"></mat-divider>
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div>
+  <h2>Редактировать профиль</h2>
+  <form [formGroup]="profileFormGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="firstname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="lastname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Биография</mat-label>
+      <input matInput formControlName="bio">
+    </mat-form-field>
+
+    <div class="row">
+      <button mat-flat-button (click)="closeDialog()">Отмена</button>
+      <button mat-flat-button [disabled]="profileFormGroup.invalid" (click)="submit()">Обновить</button>
+    </div>
+  </form>
+</div>

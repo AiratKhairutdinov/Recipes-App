@@ -1,0 +1,53 @@
+<div class="register-page">
+  <h2>Регистрация</h2>
+  <p>Уже есть аккаунт?  <a routerLink="/login">Войти</a></p>
+  <form [formGroup]="registerForm" >
+
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail Адрес</mat-label>
+        <input matInput
+               formControlName="email">
+      </mat-form-field>
+
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Имя пользователя</mat-label>
+        <input matInput
+               formControlName="username">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Имя</mat-label>
+        <input matInput
+               formControlName="firstname">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Фамилия</mat-label>
+        <input matInput
+               formControlName="lastname">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input type="password" matInput
+               formControlName="password">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Повторите пароль</mat-label>
+        <input type="password" matInput
+               formControlName="confirmPassword">
+      </mat-form-field>
+    </div>
+
+    <button style="width: 10rem" [disabled]="registerForm.invalid" (click)="submit()" mat-flat-button color="primary">
+      Зарегистрироваться
+    </button>
+
+  </form>
+</div>

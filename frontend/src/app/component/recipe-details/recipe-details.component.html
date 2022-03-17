@@ -1,0 +1,81 @@
+<div class="index-page">
+  <mat-card class="recipe-card">
+    <mat-card-header>
+      <mat-card-title>{{recipe.name}}</mat-card-title>
+      <mat-card-subtitle>Posted by {{recipe.username}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="formatImage(recipe.image)" alt="recipe image">
+    <mat-card-content>
+      <p>
+        {{recipe.description}}
+      </p>
+      <div class="row">
+
+        <div class="left">
+          <h3><b>ИНГРЕДИЕНТЫ</b></h3>
+          <ul *ngFor="let ingredient of recipe.ingredients">
+            <li>  {{ingredient}} </li>
+            <hr>
+          </ul>
+        </div>
+
+        <div class="right">
+
+          <div class="container">
+            <mat-list role="list">
+              <h3>Время подготовки</h3>
+              <mat-list-item role="listitem">
+                <h2><b>{{recipe.prepTime}} минут</b></h2>
+              </mat-list-item>
+
+              <h3> Время готовки</h3>
+              <mat-list-item role="listitem">
+                <h2><b>{{recipe.cookTime}} минут</b></h2>
+              </mat-list-item>
+
+              <h3>Количество порций</h3>
+              <mat-list-item role="listitem">
+                <h2><b>{{recipe.servings}}</b></h2>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+        </div>
+
+        <div class="container">
+          <h3><b>ПОШАГОВЫЙ РЕЦЕПТ ПРИГОТОВЛЕНИЯ</b></h3>
+          <ul *ngFor="let direction of recipe.directions; let i=index">
+            <h2>Шаг {{i + 1}}</h2>
+            <li>  {{direction}} </li>
+            <hr>
+          </ul>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="primary" *ngIf="isUserDataLoaded" (click)="likeRecipe(recipe)"
+              [ngClass]="recipe.usersLiked.indexOf(user.username) !== -1 ? 'is-liked' : 'not-liked'">
+        <mat-icon>favorite</mat-icon>
+        Like
+      </button>
+    </mat-card-actions>
+    <mat-card-subtitle>Likes: {{recipe.likes}} <span *ngIf="recipe.likes > 0">
+      by {{recipe.usersLiked}}</span></mat-card-subtitle>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <hr>
+      <mat-label>Добавить комментарий</mat-label>
+      <input (keyup.enter)="addComment(recipe.id, message.value)"
+             matInput #message maxlength="128">
+    </mat-form-field>
+    <div>
+      <p *ngFor="let comment of recipe.comments; let i=index">
+        <mat-divider></mat-divider>
+        <span style="font-weight: 500">{{comment.username}}</span>: {{comment.message}}
+        <button *ngIf="user.role == 'ADMIN'" color="accent" mat-button (click)="deleteComment(comment.id, i)">
+          <mat-icon color="accent">clear</mat-icon>
+        </button>
+      </p>
+    </div>
+  </mat-card>
+</div>

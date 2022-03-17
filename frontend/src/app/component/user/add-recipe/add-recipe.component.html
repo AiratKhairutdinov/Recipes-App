@@ -1,0 +1,105 @@
+<div style="text-align: right">
+  <button mat-flat-button color="primary" routerLink="/profile">Мои рецепты</button>
+</div>
+
+<h2>Создание рецепта</h2>
+<form [formGroup]="recipeForm">
+
+  <img class="recipe-image"
+       [src]="previewImageURL || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'"
+       alt="user image">
+
+  <input type="file"
+         style="display: none"
+         #fileInput
+         (change)="onFileSelected($event)">
+
+  <button mat-button (click)="fileInput.click()">Выбрать фото</button>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Название</mat-label>
+    <input matInput
+           formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Категория</mat-label>
+    <mat-select formControlName="category">
+      <mat-option *ngFor="let recipeCategory of recipeCategories" [value]="recipeCategory.categoryName">
+        {{recipeCategory.categoryName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Описание</mat-label>
+    <input matInput
+           formControlName="description">
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Время подготовки</mat-label>
+    <input matInput
+           formControlName="prepTime">
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Время готовки</mat-label>
+    <input matInput
+           formControlName="cookTime">
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Количество порций</mat-label>
+    <input matInput
+           formControlName="servings">
+  </mat-form-field>
+
+  <div formGroupName="ingredients">
+  <div style="text-align: left">
+    <button mat-flat-button color="accent" (click)="addIngredient()">
+      Добавить ингредиент
+    </button>
+  </div>
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Ингредиент 1</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <div *ngFor="let ingredient of ingredients.controls; let i=index">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Ингредиент {{i+2}}</mat-label>
+      <input matInput [formControlName]="i">
+    </mat-form-field>
+  </div>
+  </div>
+
+  <div formGroupName="directions">
+    <div style="text-align: left">
+      <button mat-flat-button color="accent" (click)="addDirection()">
+        Добавить шаг
+      </button>
+    </div>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Шаг 1</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <div *ngFor="let direction of directions.controls; let i=index">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Шаг {{i+2}}</mat-label>
+        <input matInput [formControlName]="i">
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div style="text-align: right">
+    <button mat-flat-button color="primary" [disabled]="recipeForm.invalid" (click)="submit()">
+      Добавить рецепт
+    </button>
+  </div>
+
+</form>
+
+

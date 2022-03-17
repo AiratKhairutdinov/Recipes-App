@@ -1,0 +1,31 @@
+<div *ngIf="isUserRecipesLoaded" class="index-page">
+  <div style="text-align: right">
+    <button mat-flat-button color="primary" routerLink="/profile/add">Добавить рецепт</button>
+  </div>
+  <h2>Мои рецепты</h2>
+  <mat-card class="recipe-card" *ngFor="let recipe of recipes; let i = index">
+    <mat-card-header>
+      <mat-card-title>{{recipe.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="formatImage(recipe.image)" alt="recipe image">
+    <mat-card-content>
+      {{recipe.description}}
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button  mat-button routerLink="/recipes/{{recipe.id}}">
+        <mat-icon color="warn">
+          restaurant
+        </mat-icon>
+        Посмотреть
+      </button>
+
+      <button  mat-button (click)="removeRecipe(recipe, i)">
+        <mat-icon color="warn">
+          delete
+        </mat-icon>
+        Удалить рецепт
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

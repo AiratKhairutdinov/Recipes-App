@@ -1,0 +1,14 @@
+.recipe-image {
+  display: block;
+  margin: 1rem auto;
+  width: 200px;
+  height: 200px;
+}
+
+.is-liked {
+  color: darkred;
+}
+
+.not-liked {
+  color: grey;
+}

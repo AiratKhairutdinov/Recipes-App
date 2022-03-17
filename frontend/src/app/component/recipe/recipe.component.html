@@ -1,0 +1,25 @@
+<div *ngIf="isRecipesLoaded" class="index-page">
+  <div *ngIf="recipes.length == 0" class="alert alert-warning col-md-12">
+    <h3 align="center">В данной категории пока нет рецептов</h3>
+  </div>
+  <mat-card class="recipe-card" *ngFor="let recipe of recipes">
+    <mat-card-header>
+      <mat-card-title>{{recipe.name}}</mat-card-title>
+      <mat-card-subtitle>Posted by {{recipe.username}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="formatImage(recipe.image)" alt="recipe image">
+    <mat-card-content>
+      {{recipe.description}}
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button routerLink="/recipes/{{recipe.id}}">
+        <mat-icon color="warn">
+          restaurant
+        </mat-icon>
+        Посмотреть
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+
+</div>
